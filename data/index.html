@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link rel="stylesheet" href="./style/normalize.css">
+      <link rel="stylesheet" href="./style/style.css">
+      <link href='https://unpkg.com/css.gg@2.0.0/icons/css/smartphone-ram.css' rel='stylesheet'>
+      <link href='https://unpkg.com/css.gg@2.0.0/icons/css/controller.css' rel='stylesheet'>
+
+      <title>Доп. настройки</title>
+  </head>
+
+  <body onload="load();">
+    <section class="container">
+      <div class="box-content">
+        <div class="header">
+          <p style="text-align: center; margin: 15px 0 0 0; padding: 0; color: white;">
+            Пожалуйста подключитесь к своему роутеру и укажите ниже вашу GMT зону. Это позволит управлять вашим устройством в локальной сети и синхронизировать время используя ваш роутер.
+            Обновление: <a class="htmlpoint" href="edit.html" target="_blank">&#8594;Открыть редактор HTML&#8592;</a>, загрузить прошивку (bin)
+            <form style="margin: 0; padding: 0;" method="POST" action="/update" enctype="multipart/form-data">
+              <div class="btn-group">
+               <input type="file" name="update" style="height: 33px;">
+               <input type="submit" class="button-save" value="Загрузить" onclick="this.value='Подождите...';" style="height: 33px;">
+              </div>
+             </form>
+          </p>
+
+          <nav>
+            <li>
+              <a class="nav-point" href="/">
+                <div class="button-nav">
+                  <div class="icon">
+                    <i class="gg-smartphone-ram"></i>
+                  </div>
+                </div>
+              Устройство
+              </a>
+            </li>
+            <li>
+              <h1 style="color: white; margin: 0; font-style: italic; text-decoration: underline;">{{SSDP}}</h1>
+            </li>
+            <li>
+              <a class="nav-point" href="/device.htm">
+                <div class="button-nav">
+                  <div class="icon">
+                    <i class="gg-controller"></i>
+                  </div>
+                </div>
+                Управление
+              </a>
+            </li>
+          </nav>
+
+          <!-- Боковой панели навигации -->
+          <div class="sidenav">
+            <h1 style="color: white; margin: 0; font-style: italic; text-decoration: underline;">{{SSDP}}</h1>
+            <a class="nav-point" href="/">
+              <div class="button-nav">
+                <div class="icon">
+                  <i class="gg-smartphone-ram"></i>
+                </div>
+              </div>
+            Устройство
+            </a>
+            <a class="nav-point" href="/device.htm">
+              <div class="button-nav">
+                <div class="icon">
+                  <i class="gg-controller"></i>
+                </div>
+              </div>
+              Управление
+            </a>
+          </div>
+
+        </div>
+
+        <section class="content" method="post" action="">
+          <div class="box1">
+            <h2>Имя устройства</h2>
+            <input id="ssdp" value="{{SSDP}}" class="form-control" pattern="[0-9a-zA-Zа-яА-Я. ]{1,20}" placeholder="Имя устройства">
+            <input class="button-save" value="Сохранить" onclick="set_ssdp(this);" type="submit">
+          </div>
+
+          <div class="box2">
+            <h2>Подключение к WiFi роутеру</h2>
+            <input id="ssid" value="{{ssid}}" class="form-control" pattern="[0-9a-zA-Z.]{1,15}" placeholder="Имя WiFi сети">
+            <input id="password" value="{{password}}" pattern=".{8,15}" onfocus="this.type='text'" type="password" class="form-control" placeholder="Пароль">
+            <input class="button-save" value="Сохранить" onclick="set_ssid(this);" type="submit">
+          </div>
+
+          <div class="box3">
+            <h2 style="margin: 0">Временная зона GMT</h2>
+            <input id="timezone" value="{{timezone}}" pattern="[0-9]{1,3}" class="form-control">
+            <input class="button-save" value="Сохранить" onclick="time_zone(this);" type="submit">
+            <input class="button-save" style="font-size: 12px;" value="Авто определение и сохранение зоны" onclick="set_time_zone(this);" type="submit">
+            <h2 style="margin: 0;">На устройстве сейчас <strong id="time">{{time}}</strong></h2>
+            <input class="button-save" value="Синхронизировать время" onclick="load_time(this);" type="submit">
+          </div>
+
+          <div class="box4">
+            <h2>Точка доступа</h2>
+            <div class="row">
+              <div class="col-sm-6">
+                <input id="ssidap" value="{{ssidAP}}" class="form-control" pattern="[0-9a-zA-Z.]{1,15}" placeholder="Имя WiFi сети">
+                <input id="passwordAp" value="{{passwordAP}}" pattern=".{8,15}" onfocus="this.type='text'" type="password" class="form-control" placeholder="Пароль">
+                <br>
+                <input class="button-save" value="Сохранить" onclick="set_ssid_ap(this);" type="submit">
+              </div>
+              <div class="col-sm-6">
+                <div class="alert alert-dismissible alert-warning">Здесь вы можете указать новое название WiFi жалюзи и пароль.</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="button-remove" onclick="restart(this,'Вы действительно хотите перезагрузить устройство?');" type="submit">Перезагрузить устройство</button>
+
+        </section>
+
+      </div>
+
+    </section>
+    <script src="./script/app.js"></script>
+  </body>
+</html>
