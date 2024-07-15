@@ -1,0 +1,410 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html, body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: rgb(66, 66, 66);
+}
+
+img {
+    width: 100%;
+}
+
+nav {
+    display: none;
+    justify-content: space-between;
+
+    width: 50%;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    position: relative;
+    z-index: 999999;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.box-content {
+    width: 100%;
+    height: 100%;
+
+    background-color: aliceblue;
+}
+
+/*Шапка с описанием и навигацией*/
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 150px;
+
+    background-color: rgb(72, 127, 247);
+}
+
+.header > p {
+    width: 850px; 
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    height: 100%;
+    width: 160px;
+
+    position: fixed; /* Фиксированная боковая панель (оставайтесь на месте при прокрутке) */
+    z-index: 1; 
+
+    top: 0; /* Оставайтесь на вершине */
+    left: 0;
+
+    background-color: rgb(72, 127, 247); 
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.htmlpoint {
+    color: #fd9014;
+    font-weight: 700;
+
+    transition: all 0.5s linear;
+}
+
+.htmlpoint:hover,
+.htmlpoint:focus {
+    color: rgb(167, 192, 226);
+}
+
+/*Кнопки навигации*/
+
+.button-nav {
+    border: 2px solid white;
+    border-radius: 100px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 5px;
+    margin: 10% auto;
+
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align:center;
+}
+
+.button-nav:hover,
+.button-nav:focus {
+    width:80px;
+    background-color: white;
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+    color: rgb(72, 127, 247);
+    transition: 0.3s;
+}
+  
+.button-nav:active {
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    transition: 0.05s
+}
+
+.nav-point {
+    text-align: center;
+    
+    font-size: 18px;
+    font-weight: 700;
+    
+    color: rgb(255, 255, 255);
+}
+
+/*Content содержимое*/
+
+.content {
+    position: relative;
+    z-index: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    width: 100%;
+    height: 500px;
+
+    margin-left: 5%;
+}
+
+.box1, 
+.box2,
+.box3,
+.box4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 350px;
+    height: 250px;
+
+    background-color: white;
+
+    text-align: center;
+
+    margin: 10px;
+}
+
+.box1, .box3 {
+    position: relative;
+    border: 1px solid #03A9F3;
+
+    border-radius: 50px;
+
+    height: 300px;
+}
+
+.box1::before,
+.box1::after,
+.box3::before,
+.box3::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.box1::before,
+.box3::before {
+    top: -5px;
+    left: -5px;
+    border-top: 3px solid #03A9F3;
+    border-left: 3px solid #03A9F3;
+}
+
+.box1::after,
+.box3::after {
+    right: -5px;
+    bottom: -5px;
+    border-bottom: 3px solid #03A9F3;
+    border-right: 3px solid #03A9F3;
+}
+
+.box1:hover::before,
+.box1:hover::after,
+.box3:hover::before,
+.box3:hover::after {
+    width: calc(100% + 9px);
+    height: calc(100% + 9px);
+}
+
+
+.box2, .box4 {
+    outline: 3px solid #03A9F3;
+    outline-offset: -1px;
+    transition: all 0.3s linear;
+
+    &:hover {
+        outline: 3px solid transparent;
+        background: 
+            linear-gradient(90deg, #03A9F3 50%, transparent 0) repeat-x,
+            linear-gradient(90deg, #03A9F3 50%, transparent 0) repeat-x,
+            linear-gradient(0deg, #03A9F3 50%, transparent 0) repeat-y,
+            linear-gradient(0deg, #03A9F3 50%, transparent 0) repeat-y;
+        background-size: 4px 1px, 4px 1px, 1px 4px, 1px 4px;
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+        animation: linearGradientMove 0.3s infinite linear;
+    }
+}
+
+@keyframes linearGradientMove {
+    100% {
+        background-position: 4px 0, -4px 100%, 0 -4px, 100% 4px;
+    }
+} 
+
+.button-save {
+    border-radius: 50px;
+    border: 2px solid #03A9F3;
+
+    margin: 10px;
+
+    font-weight: 700;
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.button-save:hover,
+.button-save:focus {
+    background-color: #03A9F3;
+    color: white;
+}
+
+.button-remove {
+    display: inline-flex;
+    position: relative;
+
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: white;
+    background: #03A9F3;
+    background: linear-gradient(90deg, rgb(129, 190, 230) 0%, rgb(86, 150, 245) 100%);
+    font-size: 22px;
+    
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(62, 178, 255, 0.64);
+
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+
+    padding: 10px;
+    margin: 0 150px 0 150px;
+}
+
+.button-remove::before {
+    content: '';
+    border-radius: 100px;
+    
+    border: 6px solid #03A9F3;
+    box-shadow: 0 0 60px rgba(39, 158, 255, 0.64);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out 0s;
+}
+    
+.button-remove:hover, 
+.button-remove:focus {
+  color: #ffc481;
+  transform: translateY(-6px);
+}
+    
+.button-remove:hover::before, 
+.button-remove:focus::before {
+  opacity: 0;
+}
+    
+.button-remove::after {
+  content: '';
+  width: 30px; 
+  height: 30px;
+  border-radius: 100%;
+  border: 6px solid #03A9F3;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 3.5s infinite;
+}
+    
+.button-remove:hover::after, 
+.button-remove:focus::after {
+  animation: none;
+  display: none;
+}
+    
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+.form-control {
+    border-radius: 50px;
+    border: 2px solid #03A9F3;
+
+    padding: 5px;
+
+    margin: 3px;
+
+    transition: all 0.5s ease-in;
+}
+
+.form-control:hover,
+.form-control:focus {
+    border: 2px solid #fd9014;
+}
+
+/*Небольшой адаптив*/
+
+@media (max-width: 800px) {
+    .container {
+        height: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    html, body {
+        background: aliceblue;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    .sidenav {
+        display: none;
+    }
+
+    .header {
+        align-items: start;
+        width: 100%; 
+        height: 300px;
+    }
+
+    .header > p {
+        width: 100%; 
+    }
+}
